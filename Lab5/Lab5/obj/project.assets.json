@@ -107,11 +107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Lab5.csproj",
+      "projectUniqueName": "/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Lab5.csproj",
       "projectName": "Lab5",
-      "projectPath": "/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Lab5.csproj",
+      "projectPath": "/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Lab5.csproj",
       "packagesPath": "/Users/ilya/.nuget/packages/",
-      "outputPath": "/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/obj/",
+      "outputPath": "/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ilya/.nuget/NuGet/NuGet.Config"
@@ -120,6 +120,7 @@
         "net6.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -132,11 +133,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -166,15 +162,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.29, 6.0.29]"
+            "version": "[6.0.26, 6.0.26]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.osx-x64",
-            "version": "[6.0.29, 6.0.29]"
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[6.0.26, 6.0.26]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.29, 6.0.29]"
+            "version": "[6.0.26, 6.0.26]"
           }
         ],
         "frameworkReferences": {
@@ -182,7 +178,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

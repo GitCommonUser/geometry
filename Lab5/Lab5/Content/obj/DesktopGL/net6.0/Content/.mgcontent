@@ -4,18 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Fonts/mainFont.spritefont</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/blankSquare.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/circle.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP0.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP1.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP2.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP3.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP4.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP5.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP6.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP7.png</File>
-    <File>/Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP8.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Fonts/mainFont.spritefont</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/blankSquare.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/circle.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP0.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP1.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP2.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP3.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP4.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP5.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP6.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP7.png</File>
+    <File>/Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/Content/Sprites/plateP8.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

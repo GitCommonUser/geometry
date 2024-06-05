@@ -21,6 +21,10 @@ public static class CohenSutherlandAlgorithm{
 
         //_displayArea = displayArea;
         //_displayFigure = displayFigure;
+        _displayArea.Clear();
+        _displayFigure.Clear();
+        _displayFigureCopy.Clear();
+        byteCodesCopy.Clear();
 
         for(int i = 0; i < displayArea.Count; i++){
             Point point = new Point(displayArea[i].X,displayArea[i].Y);

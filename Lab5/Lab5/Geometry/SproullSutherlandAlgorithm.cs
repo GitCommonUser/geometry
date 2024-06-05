@@ -244,6 +244,8 @@ public static class SproullSutherlandAlgorithm
             }
             
         }
+
+        return C;
     }
 
     private static ByteCode CalculateCode(Point A){

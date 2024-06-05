@@ -34,18 +34,7 @@ namespace Lab5
                 currentFigure--;
             }
             ResetAction();
-            /*regionPoints.Clear();
-            figurePoints.Clear();
-            for(int i = 0; i < regionList[currentFigure].Count; i++){
-                Point point = new Point(regionList[currentFigure][i].X,regionList[currentFigure][i].Y);
-                regionPoints.Add(point);
-            }
-            for(int i = 0; i < figureList[currentFigure].Count; i++){
-                Point point = new Point(figureList[currentFigure][i].X,figureList[currentFigure][i].Y);
-                figurePoints.Add(point);
-            }
-            regionLines = GenerateLines(regionPoints, Color.Red);
-            figureLines = GenerateLines(figurePoints, Color.Blue);*/
+
         }
 
         private void NextAction(){
@@ -53,37 +42,20 @@ namespace Lab5
                 currentFigure++;
             }
             ResetAction();
-            /*regionPoints.Clear();
-            figurePoints.Clear();
-            for(int i = 0; i < regionList[currentFigure].Count; i++){
-                Point point = new Point(regionList[currentFigure][i].X,regionList[currentFigure][i].Y);
-                regionPoints.Add(point);
-            }
-            for(int i = 0; i < figureList[currentFigure].Count; i++){
-                Point point = new Point(figureList[currentFigure][i].X,figureList[currentFigure][i].Y);
-                figurePoints.Add(point);
-            }
-            regionLines = GenerateLines(regionPoints, Color.Red);
-            figureLines = GenerateLines(figurePoints, Color.Blue);*/
         }
 
         private void ResetAction(){
 
-            //GenerateTest();
             regionPoints.Clear();
             figurePoints.Clear();
             for(int i = 0; i < regionList[currentFigure].Count; i++){
-                //regionPoints.Add(regionList[currentFigure][i]);
                 Point point = new Point(regionList[currentFigure][i].X,regionList[currentFigure][i].Y);
                 regionPoints.Add(point);
             }
             for(int i = 0; i < figureList[currentFigure].Count; i++){
-                //figurePoints.Add(figureList[currentFigure][i]);
                 Point point = new Point(figureList[currentFigure][i].X,figureList[currentFigure][i].Y);
                 figurePoints.Add(point);
             }
-            //figurePoints = figureList[currentFigure];
-            //regionPoints = regionList[currentFigure];
             figureLines = GenerateLines(figurePoints, Color.Blue);
             regionLines = GenerateLines(regionPoints, Color.Red);
 
@@ -115,7 +87,6 @@ namespace Lab5
 
             figureLines = SproullSutherlandAlgorithm.Execute(regionPoints, figurePoints);
 
-            Console.WriteLine(currentFigure);
         }
 
         private void CohenStart(){

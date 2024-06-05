@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Lab5
-build_property.ProjectDir = /Users/ilya/Desktop/GeometryLabs/Lab5/Lab5/
+build_property.ProjectDir = /Users/ilya/Desktop/VSCode proj/GeometryLabs/Lab5/Lab5/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
