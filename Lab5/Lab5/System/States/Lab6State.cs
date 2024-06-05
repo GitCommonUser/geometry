@@ -73,12 +73,10 @@ namespace Lab5
             regionPoints.Clear();
             figurePoints.Clear();
             for(int i = 0; i < regionList[currentFigure].Count; i++){
-                //regionPoints.Add(regionList[currentFigure][i]);
                 Point point = new Point(regionList[currentFigure][i].X,regionList[currentFigure][i].Y);
                 regionPoints.Add(point);
             }
             for(int i = 0; i < figureList[currentFigure].Count; i++){
-                //figurePoints.Add(figureList[currentFigure][i]);
                 Point point = new Point(figureList[currentFigure][i].X,figureList[currentFigure][i].Y);
                 figurePoints.Add(point);
             }
@@ -95,20 +93,15 @@ namespace Lab5
             sproullSutherlandButton.Enable();
             cohenSutherlandButton.Disable();
 
-            //GenerateTest();
-            //figurePoints = figureList[currentFigure];
-            //regionPoints = regionList[currentFigure];
             regionPoints.Clear();
             figurePoints.Clear();
             for(int i = 0; i < regionList[currentFigure].Count; i++){
                 Point point = new Point(regionList[currentFigure][i].X,regionList[currentFigure][i].Y);
                 regionPoints.Add(point);
-                //regionPoints.Add(regionList[currentFigure][i]);
             }
             for(int i = 0; i < figureList[currentFigure].Count; i++){
                 Point point = new Point(figureList[currentFigure][i].X,figureList[currentFigure][i].Y);
                 figurePoints.Add(point);
-                //figurePoints.Add(figureList[currentFigure][i]);
             }
             figureLines = GenerateLines(figurePoints, Color.Blue);
             regionLines = GenerateLines(regionPoints, Color.Red);
@@ -125,20 +118,15 @@ namespace Lab5
             sproullSutherlandButton.Enable();
             cohenSutherlandButton.Enable();
 
-            //GenerateTest();
-            //figurePoints = figureList[currentFigure];
-            //regionPoints = regionList[currentFigure];
             regionPoints.Clear();
             figurePoints.Clear();
             for(int i = 0; i < regionList[currentFigure].Count; i++){
                 Point point = new Point(regionList[currentFigure][i].X,regionList[currentFigure][i].Y);
                 regionPoints.Add(point);
-                //regionPoints.Add(regionList[currentFigure][i]);
             }
             for(int i = 0; i < figureList[currentFigure].Count; i++){
                 Point point = new Point(figureList[currentFigure][i].X,figureList[currentFigure][i].Y);
                 figurePoints.Add(point);
-                //figurePoints.Add(figureList[currentFigure][i]);
             }
             figureLines = GenerateLines(figurePoints, Color.Blue);
             regionLines = GenerateLines(regionPoints, Color.Red);
@@ -164,24 +152,23 @@ namespace Lab5
 
         private void GenerateTest(){
 
+            // 1 Фигура
             List<Point> regPoints1 = new List<Point>();
             List<Point> figPoints1 = new List<Point>();
 
-            Point figA = new Point(800, 400);
-            Point figB = new Point(1400, 500); 
-            Point figC = new Point(700, 900); 
-            Point figD = new Point(550, 650); 
-            Point figE = new Point(1100,200);
+            Point figA = new Point(1000, 600);
+            Point figB = new Point(1600, 600); 
+            Point figC = new Point(1600, 1000); 
+            Point figD = new Point(1000, 1000); 
 
             regPoints1.Add(figD);
             regPoints1.Add(figC);
             regPoints1.Add(figB);
-            regPoints1.Add(figE);
             regPoints1.Add(figA);
 
-            Point A = new Point(1000, 420);
-            Point B = new Point(840, 520);
-            Point C = new Point(740, 700);
+            Point A = new Point(1200, 700);
+            Point B = new Point(1100, 850);
+            Point C = new Point(1400, 800);
 
             figPoints1.Add(A);
             figPoints1.Add(B);
@@ -190,26 +177,23 @@ namespace Lab5
             figureList.Add(figPoints1);
             regionList.Add(regPoints1);
 
-
-            //regionPoints.Clear();
-            //figurePoints.Clear();
-
+            // 2 Фигура
             List<Point> regPoints2 = new List<Point>();
             List<Point> figPoints2 = new List<Point>();
 
-            figA = new Point(1000, 400);
-            figB = new Point(1400, 400); 
-            figC = new Point(1400, 900); 
-            figD = new Point(1000, 900); 
+            figA = new Point(1000, 600);
+            figB = new Point(1600, 600); 
+            figC = new Point(1600, 1000); 
+            figD = new Point(1000, 1000); 
 
             regPoints2.Add(figA);
             regPoints2.Add(figB);
             regPoints2.Add(figC);
             regPoints2.Add(figD);
 
-            A = new Point(900, 600);
-            B = new Point(1500, 600);
-            C = new Point(1200, 1000);
+            A = new Point(1500, 700);
+            B = new Point(1400, 850);
+            C = new Point(1700, 800);
 
             figPoints2.Add(A);
             figPoints2.Add(B);
@@ -218,6 +202,7 @@ namespace Lab5
             figureList.Add(figPoints2);
             regionList.Add(regPoints2);
 
+            // 3 Фигура
             List<Point> regPoints3 = new List<Point>();
             List<Point> figPoints3 = new List<Point>();
 
@@ -243,8 +228,7 @@ namespace Lab5
             regionList.Add(regPoints3);
 
 
-
-
+            // Добавление всех фигур
             regionPoints.Clear();
             figurePoints.Clear();
             for(int i = 0; i < regionList[0].Count; i++){
