@@ -25,7 +25,7 @@ namespace Lab5
         }
 
         private void GoToLab7(){
-            Console.WriteLine("Lab7");
+            _game.ChangeState(new Lab7State(_game, _graphicsDevice, _content));
             //_game.ChangeState(new SettingsState(_game, _graphicsDevice, _content));
         }
         public MenuState(Main game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
@@ -40,8 +40,8 @@ namespace Lab5
             int startX = 100, startY = 800, buttonW = 500, buttonH = 120, buttonSpace = 50;
 
             Lab5 = new Button(new Rectangle(startX,startY,buttonW,buttonH), "Lab 5 - Convex hull",Lab5Action);
-            Lab6 = new Button(new Rectangle(startX,startY + 1*buttonH + 1*buttonSpace,buttonW,buttonH), "Lab 6",Lab6Action);
-            Lab7 = new Button(new Rectangle(startX,startY + 2*buttonH + 2*buttonSpace,buttonW,buttonH), "Lab 7",Lab7Action);
+            Lab6 = new Button(new Rectangle(startX,startY + 1*buttonH + 1*buttonSpace,buttonW,buttonH), "Lab 6 - Clipping",Lab6Action);
+            Lab7 = new Button(new Rectangle(startX,startY + 2*buttonH + 2*buttonSpace,buttonW,buttonH), "Lab 7 - Triangulation",Lab7Action);
             quitButton = new Button(new Rectangle(startX,startY + 3*buttonH + 3*buttonSpace,buttonW,buttonH), "Quit",quitAction);
             
         }

@@ -9,20 +9,19 @@ namespace Lab5
     public class Lab7State : State
     {
 
-        private Button cohenSutherlandButton, sproullSutherlandButton, cyrusBeckButton, backButton, resetButton, prevButton, nextButton;
-        private Button.ButtonAction cohenAction, sproullAction, cyrusAction, backAction, resetAction, prevAction, nextAction;
+        private Button primitiveButton, monotoneButton, backButton, resetButton, prevButton, nextButton;
+        private Button.ButtonAction primitiveAction, monotoneAction, backAction, resetAction, prevAction, nextAction;
 
 
 
         private List<List<Point>> figureList = new List<List<Point>>();
-        private List<List<Point>> regionList = new List<List<Point>>();
 
         private int currentFigure = 1;
 
         private List<Point> figurePoints = new List<Point>();
-        private List<Point> regionPoints = new List<Point>();
         private List<Line> figureLines = new List<Line>();
-        private List<Line> regionLines = new List<Line>();
+
+        private List<Line> triangleList = new List<Line>();
 
 
         private void Back(){
@@ -34,7 +33,8 @@ namespace Lab5
                 currentFigure--;
             }
             figurePoints = figureList[currentFigure-1];
-            regionPoints = regionList[currentFigure-1];
+
+            figureLines = GenerateLines(figurePoints, Color.Red);
         }
 
         private void NextAction(){
@@ -42,54 +42,34 @@ namespace Lab5
                 currentFigure++;
             }
             figurePoints = figureList[currentFigure-1];
-            regionPoints = regionList[currentFigure-1];
+
+            figureLines = GenerateLines(figurePoints, Color.Red);
         }
 
         private void ResetAction(){
 
-            GenerateTest();
-            figureLines = GenerateLines(figurePoints, Color.Blue);
 
-            cyrusBeckButton.Enable();
-            sproullSutherlandButton.Enable();
-            cohenSutherlandButton.Enable();
+            monotoneButton.Enable();
+            primitiveButton.Enable();
+
+            triangleList.Clear();
         }
 
-        private void SproullStart(){
+        private void PrimitiveStart(){
             
-            cyrusBeckButton.Enable();
-            sproullSutherlandButton.Disable();
-            cohenSutherlandButton.Enable();
+            monotoneButton.Enable();
+            primitiveButton.Disable();
 
-            GenerateTest();
-            figureLines = GenerateLines(figurePoints, Color.Blue);
-
-            figureLines = SproullSutherlandAlgorithm.Execute(regionPoints, figurePoints);
-        }
-
-        private void CohenStart(){
-
-            cyrusBeckButton.Enable();
-            sproullSutherlandButton.Enable();
-            cohenSutherlandButton.Disable();
-
-            GenerateTest();
-            figureLines = GenerateLines(figurePoints, Color.Blue);
-
-            figureLines = CohenSutherlandAlgorithm.Execute(regionPoints, figurePoints);
+            triangleList = PrimitiveTriangulation.Execute(figurePoints);
 
         }
 
-        private void CyrusStart(){
+        private void MonotoneStart(){
 
-            cyrusBeckButton.Disable();
-            sproullSutherlandButton.Enable();
-            cohenSutherlandButton.Enable();
+            monotoneButton.Disable();
+            primitiveButton.Enable();
 
-            GenerateTest();
-            figureLines = GenerateLines(figurePoints, Color.Blue);
 
-            figureLines = CyrusBeck.Execute(figurePoints,regionPoints);
         }
 
 
@@ -106,28 +86,61 @@ namespace Lab5
             return lines;
         }
 
-        private void GenerateTest(){
+        private void Generate(){
 
-            regionPoints.Clear();
+            // 1 Фигура
+            List<Point> regPoints1 = new List<Point>();
+
+            Point figA = new Point(1000, 600);
+            Point figB = new Point(1600, 600);
+            Point figC = new Point(1600, 1000);
+            Point figD = new Point(1000, 1000);
+
+            regPoints1.Add(figD);
+            regPoints1.Add(figC);
+            regPoints1.Add(figB);
+            regPoints1.Add(figA);
+
+            figureList.Add(regPoints1);
+
+            // 2 Фигура
+            List<Point> regPoints2 = new List<Point>();
+
+            figA = new Point(1000, 600);
+            figB = new Point(1600, 600);
+            figC = new Point(1600, 1000);
+            figD = new Point(1000, 1000);
+
+            regPoints2.Add(figA);
+            regPoints2.Add(figB);
+            regPoints2.Add(figC);
+            regPoints2.Add(figD);
+
+            figureList.Add(regPoints2);
+
+            // 3 Фигура
+            List<Point> regPoints3 = new List<Point>();
+
+            figA = new Point(1200, 400);
+            figB = new Point(1500, 400);
+            figC = new Point(1500, 700);
+            figD = new Point(1200, 700);
+
+            regPoints3.Add(figA);
+            regPoints3.Add(figB);
+            regPoints3.Add(figC);
+            regPoints3.Add(figD);
+
+
+            figureList.Add(regPoints3);
+
+
+            // Добавление всех фигур
             figurePoints.Clear();
-
-            Point figA = new Point(800, 400);
-            Point figB = new Point(1400, 400);
-            Point figC = new Point(1400, 900);
-            Point figD = new Point(800, 900);
-
-            regionPoints.Add(figA);
-            regionPoints.Add(figB);
-            regionPoints.Add(figC);
-            regionPoints.Add(figD);
-
-            Point A = new Point(1000, 420);
-            Point B = new Point(840, 520);
-            Point C = new Point(740, 700);
-
-            figurePoints.Add(A);
-            figurePoints.Add(B);
-            figurePoints.Add(C);
+            for (int i = 0; i < figureList[0].Count; i++)
+            {
+                figurePoints.Add(figureList[0][i]);
+            }
         }
 
         public Lab7State(Main game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
@@ -135,9 +148,8 @@ namespace Lab5
 
 
             backAction = Back;
-            cohenAction = CohenStart;
-            cyrusAction = CyrusStart;
-            sproullAction = SproullStart;
+            monotoneAction = MonotoneStart;
+            primitiveAction = PrimitiveStart;
             resetAction = ResetAction;
 
             nextAction = NextAction;
@@ -146,9 +158,8 @@ namespace Lab5
             int startX = 100, startY = 800, buttonW = 500, buttonH = 120, buttonSpace = 30;
             backButton = new Button(new Rectangle(startX,startY + 3*buttonH + 3*buttonSpace,buttonW,buttonH), "Back to Menu",backAction);
 
-            cohenSutherlandButton = new Button(new Rectangle(startX,startY - 300,buttonW,buttonH), "Cohen-Sutherland",cohenAction);
-            sproullSutherlandButton = new Button(new Rectangle(startX,startY + 1*buttonH + 1*buttonSpace - 300,buttonW,buttonH), "Sproull-Sutherland",sproullAction);
-            cyrusBeckButton = new Button(new Rectangle(startX,startY + 2*buttonH + 2*buttonSpace - 300,buttonW,buttonH), "Cyrus-Beck",cyrusAction);
+            primitiveButton = new Button(new Rectangle(startX,startY + 1*buttonH + 1*buttonSpace - 300,buttonW,buttonH), "Primitive",primitiveAction);
+            monotoneButton = new Button(new Rectangle(startX,startY + 2*buttonH + 2*buttonSpace - 300,buttonW,buttonH), "Monotone",monotoneAction);
             resetButton = new Button(new Rectangle(startX,startY + 3*buttonH + 3*buttonSpace - 260,buttonW,buttonH), "Reset",resetAction, Color.LightGreen);
 
             prevButton = new Button(new Rectangle(1600-200,1300-25,100,100), "<",prevAction);
@@ -159,10 +170,9 @@ namespace Lab5
 
 
 
-            GenerateTest();
+            Generate();
 
-            regionLines = GenerateLines(regionPoints, Color.Red);
-            figureLines = GenerateLines(figurePoints, Color.Blue);
+            figureLines = GenerateLines(figurePoints, Color.Red);
 
 
         }
@@ -170,10 +180,8 @@ namespace Lab5
 
         public override void Update(GameTime gameTime)
         {
-
-            cohenSutherlandButton.Update();
-            sproullSutherlandButton.Update();
-            cyrusBeckButton.Update();
+            primitiveButton.Update();
+            monotoneButton.Update();
             resetButton.Update();
             backButton.Update();
 
@@ -194,17 +202,14 @@ namespace Lab5
                 nextButton.Enable();
             }
 
-            //numCountInput.Update();
-
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, null,null,null,null,null, Main.resolutionScale);
 
-            cohenSutherlandButton.Draw(spriteBatch);
-            sproullSutherlandButton.Draw(spriteBatch);
-            cyrusBeckButton.Draw(spriteBatch);
+            primitiveButton.Draw(spriteBatch);
+            monotoneButton.Draw(spriteBatch);
             resetButton.Draw(spriteBatch);
 
             prevButton.Draw(spriteBatch);
@@ -218,19 +223,16 @@ namespace Lab5
                 l.Draw(spriteBatch);
             }
 
-            foreach(Line l in regionLines){
+            foreach (Line l in triangleList)
+            {
                 l.Draw(spriteBatch);
             }
-
-
 
 
             SliceDraw(spriteBatch, ContentLoad.plate, new Rectangle(650,50,(int)Main.screenCenter.X*2 - 700, 1100), Color.White, 0.5f);
             //SliceDraw(spriteBatch, ContentLoad.plate, new Rectangle((int)Main.screenCenter.X+50,100,(int)Main.screenCenter.X-150, 900), Color.White, 0.5f);
 
 
-
-            
             spriteBatch.End();
 
         }

@@ -20,72 +20,82 @@ public static class CyrusBeck{
     public static List<Line> Execute(List<Point> figureList, List<Point> regionList){
 
         lines.Clear();
-        _figureList.Clear();
-        _regionList.Clear();
-        normalList.Clear();
 
-        //List<Point> normalList = new List<Point>();
-
+        Point[] vert = new Point[regionList.Count];
         for(int i = 0; i < regionList.Count; i++){
-            Point point = new Point(regionList[i].X,regionList[i].Y);
-            _regionList.Add(point);
-
-            normalList.Add(new Point(regionList[(i+1) % regionList.Count].X - regionList[i].X,regionList[i].Y - regionList[(i+1) % regionList.Count].Y));
+            vert[i] = regionList[i];
         }
+            
+        Point[] line = new Point[2];
+        line[0] = figureList[figureList.Count - 1];
+        line[1] = figureList[0];
+        Point[] result = new Point[2];
+        result = CyrusBeck1(vert, line);
+        lines.Add(new Line(result[0],result[1], Color.Blue));
+        for(int i = 0; i < figureList.Count-1; i++){
 
-        for(int i = 0; i < figureList.Count; i++){
-            Point point = new Point(figureList[i].X,figureList[i].Y);
-            _figureList.Add(point);
-        }
-        
-
-        /*for(int i =0; i < figureList.Count; i++){
-            _figureList.Add(figureList[i]);
-        }
-
-        for(int i =0; i < regionList.Count; i++){
-            _regionList.Add(regionList[i]);
-
-            normalList.Add(new Point(regionList[(i+1) % regionList.Count].X - regionList[i].X,regionList[i].Y - regionList[(i+1) % regionList.Count].Y));
-        }*/
-
-        Sub(_figureList[_figureList.Count-1], _figureList[0]);
-
-        for(int i = 0; i < _figureList.Count-1; i++){
-
-            Sub(_figureList[i], _figureList[i+1]);
+            line[0] = figureList[i];
+            line[1] = figureList[i+1];
+            result = CyrusBeck1(vert, line);
+            lines.Add(new Line(result[0], result[1], Color.Blue));
         }
 
         return lines;
 
     }
 
-    private static void Sub(Point a, Point b){
 
-        Point[] pair = new Point[2];
 
-        Vector2 P1_P0 = new Vector2(b.X - a.X , b.Y - a.Y);
-        Vector2[] P0_PEi = new Vector2[_regionList.Count];
+    /// TEST
+    static Point[] CyrusBeck1(Point[] vertices, Point[] line)
+    {
+        // Значение временного владельца, которое будет возвращено
+        Point[] newPair = new Point[2];
 
-        for(int i = 0; i < _regionList.Count; i++){
-            P0_PEi[i].X = _regionList[i].X - a.X;
-            P0_PEi[i].Y = _regionList[i].Y - a.Y;
-        }
+        // Нормали инициализируются динамически (можно делать это и статически, не имеет значения)
+        Point[] normal = new Point[vertices.Length];
 
-        float[] numerator = new float[_regionList.Count], denominator = new float[_regionList.Count];
-
-        for (int i = 0; i < _regionList.Count; i++)
+        // Считаем нормали
+        for (int i = 0; i < vertices.Length; i++)
         {
-            numerator[i] = DotProduct(normalList[i].GetVector(), P0_PEi[i]);
-            denominator[i] = DotProduct(normalList[i].GetVector(), P1_P0);
+            normal[i] = new Point(0,0);
+            normal[i].Y = vertices[(i + 1) % vertices.Length].X - vertices[i].X;
+            normal[i].X = vertices[i].Y - vertices[(i + 1) % vertices.Length].Y;
         }
 
-        float[] t = new float[_regionList.Count];
+        // Считаем P1 - P0
+        Point P1_P0 = new Point(line[1].X - line[0].X, line[1].Y - line[0].Y);
 
+        // Задаём массив для всех значений p1-p0
+        Point[] P0_PEi = new Point[vertices.Length];
+
+        // Считаем значения P0 - PEi для всех вершин
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            P0_PEi[i] = new Point(0,0);
+            P0_PEi[i].X = vertices[i].X - line[0].X;
+            P0_PEi[i].Y = vertices[i].Y - line[0].Y;
+        }
+
+        int[] numerator = new int[vertices.Length], denominator = new int[vertices.Length];
+
+        // Считаем числитель и знаменатель
+
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            numerator[i] = Dot(normal[i], P0_PEi[i]);
+            denominator[i] = Dot(normal[i], P1_P0);
+        }
+
+        // Инизицализируем массив с параметром t
+        float[] t = new float[vertices.Length];
+
+        // Создаем два вектора, называемых "не входящими
+        // и "не выходящими", чтобы сгруппировать "т"
         List<float> tE = new List<float>(), tL = new List<float>();
 
-        // Calculating 't' and grouping them accordingly
-        for (int i = 0; i < _regionList.Count; i++)
+        // Вычисление "t" и группировка их соответствующим образом
+        for (int i = 0; i < vertices.Length; i++)
         {
             t[i] = (float)numerator[i] / (float)denominator[i];
 
@@ -95,40 +105,47 @@ public static class CyrusBeck{
                 tL.Add(t[i]);
         }
 
-        // Initializing the final two values of 't'
+        // Инициализируем последние два значения 't'
         float[] temp = new float[2];
 
-        // Taking the max of all 'tE' and 0, so pushing 0
+        // Берем максимальное значение для всех 'tE' и 0, таким образом, нажимаем 0
         tE.Add(0f);
-        //temp[0] = Max(tE);
-        temp[0] = tE.Max();
+        temp[0] = Max(tE);
 
-        // Taking the min of all 'tL' and 1, so pushing 1
+        // Берем минимальное значение всех 'tL' и 1, таким образом, нажимаем 1
         tL.Add(1f);
-        temp[1] = tL.Min();
-        //temp[1] = Min(tL);
+        temp[1] = Min(tL);
 
-    
+ 
         if (temp[0] > temp[1])
         {
-            pair[0] = new Point(-1,-1);
-            pair[1] = new Point(-1, -1);
-
-            lines.Add(new Line(pair[0],pair[1],Color.Blue));
-            return;
-            //return newPair;
+            newPair[0] = new Point(-1, -1);
+            newPair[1] = new Point(-1, -1);
+            Console.WriteLine("here");
+            return newPair;
         }
 
-        pair[0] = new Point((int)(a.X + P1_P0.X * temp[0]), (int)(a.Y + P1_P0.Y * temp[0]));
-        pair[1] = new Point((int)(a.X + P1_P0.X * temp[1]), (int)(a.Y + P1_P0.Y * temp[1]));
+        // Вычисление координат в терминах x и y
+        newPair[0] = new Point((int)(line[0].X + P1_P0.X * temp[0]), (int)(line[0].Y + P1_P0.Y * temp[0]));
+        newPair[1] = new Point((int)(line[0].X + P1_P0.X * temp[1]), (int)(line[0].Y + P1_P0.Y * temp[1]));
 
-        lines.Add(new Line(pair[0],pair[1],Color.Blue));
-        return;
-        //return newPair;
+        return newPair;
     }
 
-    private static float DotProduct(Vector2 p0, Vector2 p1)
+    static int Dot(Point p0, Point p1)
     {
-        return p0.X * p1.X + p0.Y * p1.Y;
+        return (int)(p0.X * p1.X + p0.Y * p1.Y);
+    }
+
+    // Function to calculate the max from a list of floats
+    static float Max(List<float> t)
+    {
+        return t.Max();
+    }
+
+    // Function to calculate the min from a list of floats
+    static float Min(List<float> t)
+    {
+        return t.Min();
     }
 }

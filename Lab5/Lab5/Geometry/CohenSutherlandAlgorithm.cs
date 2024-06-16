@@ -121,9 +121,9 @@ public static class CohenSutherlandAlgorithm{
         bool b3 = byteCodes[firstIndex].b3;
 
         bool a0 = byteCodes[secondIndex].b0;
-        bool a1 = byteCodes[secondIndex].b0;
-        bool a2 = byteCodes[secondIndex].b0;
-        bool a3 = byteCodes[secondIndex].b0;
+        bool a1 = byteCodes[secondIndex].b1;
+        bool a2 = byteCodes[secondIndex].b2;
+        bool a3 = byteCodes[secondIndex].b3;
 
         if(!b0 && !b1 && !b2 && !b3 && !a0 && !a1 && !a2 && !a3){
             lineList.Add(new Line(_displayFigure[firstIndex], _displayFigure[secondIndex], Color.Blue));

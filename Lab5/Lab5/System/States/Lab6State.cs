@@ -108,7 +108,6 @@ namespace Lab5
 
             figureLines = CohenSutherlandAlgorithm.Execute(regionPoints, figurePoints);
 
-            Console.WriteLine(currentFigure);
 
         }
 
@@ -132,8 +131,6 @@ namespace Lab5
             regionLines = GenerateLines(regionPoints, Color.Red);
 
             figureLines = CyrusBeck.Execute(figurePoints,regionPoints);
-
-            Console.WriteLine(currentFigure);
         }
 
 
@@ -227,7 +224,31 @@ namespace Lab5
             figureList.Add(figPoints3);
             regionList.Add(regPoints3);
 
+            // 4 Фигура
+            List<Point> regPoints4 = new List<Point>();
+            List<Point> figPoints4 = new List<Point>();
 
+            
+            figA = new Point(1600,400);
+            figB = new Point(1700, 800);
+            figC = new Point(1400, 600);
+
+
+            regPoints4.Add(figA);
+            regPoints4.Add(figB);
+            regPoints4.Add(figC);
+
+            A = new Point(1600, 600);
+            B = new Point(2100, 700);
+            C = new Point(2100, 1000);
+
+            figPoints4.Add(A);
+            figPoints4.Add(B);
+            figPoints4.Add(C);
+            //figPoints4.Add(D);
+
+            figureList.Add(figPoints4);
+            regionList.Add(regPoints4);
             // Добавление всех фигур
             regionPoints.Clear();
             figurePoints.Clear();
@@ -319,7 +340,7 @@ namespace Lab5
             prevButton.Draw(spriteBatch);
             nextButton.Draw(spriteBatch);
 
-            spriteBatch.DrawString(ContentLoad.mainFont, (currentFigure+1).ToString() , new Vector2(1600,1300), Color.Black);
+            spriteBatch.DrawString(ContentLoad.mainFont, (currentFigure+1).ToString() , new Vector2(1585,1300), Color.Black);
 
             backButton.Draw(spriteBatch);
 
